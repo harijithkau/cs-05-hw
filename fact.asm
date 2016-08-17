@@ -6,23 +6,20 @@ title "to print the factorial of a given number"
   str   db	"the factorial is:$"
   .code
 prnt macro
-  mov   dl,ah
-  mov   dh,al
-  mov   ah,02h
+  mov   dl, ah
+  mov   dh, al
+  mov   ah, 02h
   int   21h
-  mov   dl,dh
-  mov   ah,02h
+  mov   dl, dh
+  mov   ah, 02h
   int   21h
 endm
- 
 main  proc
   mov   ax, @data
   mov   ds, ax
- 
   mov   dx, offset str
   mov   ah, 09h
   int   21h
- 
   mov   cx, val
   mov   ax, 1
 top:
@@ -31,7 +28,6 @@ top:
   mov   dx, 0
   mov   bx, 100
   div   bx
-
   aam
   add   ax, 3030h
   push  dx
