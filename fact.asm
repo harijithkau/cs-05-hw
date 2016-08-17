@@ -1,72 +1,46 @@
-data segment
-  num   db  5
-  fact  db  0  
+title "to print the factorial of a given number"
+  .model small
+  .stack
+  .data
+  val   dw  5
+  str   db	"the factorial is:$"
+  .code
+prnt macro
+  mov   dl,ah
+  mov   dh,al
+  mov   ah,02h
+  int   21h
+  mov   dl,dh
+  mov   ah,02h
+  int   21h
+endm
+ 
+main  proc
+  mov   ax, @data
+  mov   ds, ax
+ 
+  mov   dx, offset str
+  mov   ah, 09h
+  int   21h
+ 
+  mov   cx, val
+  mov   ax, 1
+top:
+  mul   cx
+  loop  top
+  mov   dx, 0
+  mov   bx, 100
+  div   bx
 
-DATA SEGMENT
-    NUM DB ?
-    FACT DB 1H
-    RES DB 10 DUP ('$')
-    MSG1 DB "ENTER NUMBER : $"
-    MSG2 DB 10,13,"RESULT : $"
-DATA ENDS
-CODE SEGMENT
-        ASSUME DS:DATA,CS:CODE
-START:       
-    MOV AX,DATA
-    MOV DS,AX
-   
-    LEA DX,MSG1
-    MOV AH,9
-    INT 21H
-   
-    MOV AH,1
-    INT 21H
-    SUB AL,30H
-    MOV NUM,AL
-   
-    MOV AH,0
-    MOV AL,FACT
-    MOV CH,0
-    MOV CL,NUM
-     
-LABEL1: MUL CL
-    LOOP LABEL1   
-               
-    LEA SI,RES
-    CALL HEX2DEC
-      
-    LEA DX,MSG2
-    MOV AH,9
-    INT 21H
-      
-    LEA DX,RES
-    MOV AH,9
-    INT 21H
-            
-    MOV AH,4CH
-    INT 21H        
-CODE ENDS  
-HEX2DEC PROC NEAR
-    MOV CX,0
-    MOV BX,10
-   
-LOOP1: MOV DX,0
-       DIV BX
-       ADD DL,30H
-       PUSH DX
-       INC CX
-       CMP AX,9
-       JG LOOP1
-     
-       ADD AL,30H
-       MOV [SI],AL
-     
-LOOP2: POP AX
-       INC SI
-       MOV [SI],AL
-       LOOP LOOP2
-       RET
-HEX2DEC ENDP           
-   
-END START
-
+  aam
+  add   ax, 3030h
+  push  dx
+  prnt
+  pop   ax
+  aam
+  add   ax, 3030h
+  prnt
+  mov   ah, 4ch
+  int   21h
+  main  endp
+  end   main
