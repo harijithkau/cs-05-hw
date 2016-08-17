@@ -1,4 +1,4 @@
-title "to print the factorial of a given number"
+title   "to print the factorial of a given number"
   .model small
   .stack
   .data
