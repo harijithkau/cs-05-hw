@@ -10,7 +10,7 @@ After the interrupt, AL contains the ASCII code of the input character. The char
 Input a string.
 
         SECTION .data
-Buffer  DB      BUFSIZE         ;BUFSIZE is max number of chars to read, <= 255
+        Buffer  DB      BUFSIZE         ;BUFSIZE is max number of chars to read, <= 255
         RESB    BUFSIZE + 1
 
         SECTION .text
