@@ -14,7 +14,7 @@ start:
 	lea	dx, msg
 	mov	ah, 09h
 	int	21h
-	mov	ah, 4ch
+	mov	ah, 4ch		; termination of program
 	int 	21h
 end start
 
