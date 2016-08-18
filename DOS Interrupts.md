@@ -2,10 +2,13 @@ DOS Interrupts
 
 MS-DOS provides many common services through INT 21h. Entire books have been written about the variety of functions available; I will just list the most basic ones for console input and output here.
 Input a character.
+
         MOV     AH, 01h
         INT     21h
+        
 After the interrupt, AL contains the ASCII code of the input character. The character is echoed (displayed on the screen). Use function code 8 instead of 1 for no echo.
 Input a string.
+
         SECTION .data
 Buffer  DB      BUFSIZE         ;BUFSIZE is max number of chars to read, <= 255
         RESB    BUFSIZE + 1
@@ -15,6 +18,7 @@ Buffer  DB      BUFSIZE         ;BUFSIZE is max number of chars to read, <= 255
         MOV     DX, Buffer
         MOV     AH, 0Ah
         INT     21h
+        
 After the interrupt, BYTE [Buffer + 1] will contain the number of characters read, and the characters themselves will start at Buffer + 2. The characters will be terminated by a carriage return (ASCII code 13), although this will not be included in the count.
 Output a character.
         MOV     DL, ...
