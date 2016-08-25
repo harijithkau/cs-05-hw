@@ -1,4 +1,4 @@
-DOS Interrupts
+#DOS Interrupts
 
 MS-DOS provides many common services through INT 21h. Entire books have been written about the variety of functions available; I will just list the most basic ones for console input and output here.
 Input a character.
